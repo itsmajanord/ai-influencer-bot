@@ -7,12 +7,12 @@ language: en
 # Utseende (används i varje bildprompt tillsammans med referensbilden reference.jpg)
 appearance: >
   youthful and pretty 20-year-old Swedish woman, long light blonde hair worn down and loose
-  with soft natural waves, blue eyes, fresh glowing skin, light natural makeup with mascara,
+  with soft natural waves, bright clear blue eyes, fresh glowing skin, light natural makeup with mascara,
   cute confident smile, slim athletic body from strength training with natural proportions,
   a moderate full bust in proportion to her slim frame, narrow waist, curvy hips and a round toned butt
 
 personality: >
-  Glad, självsäker och jordnära. 22 år, bor i Göteborg. Styrketränar 4 pass i veckan
+  Glad, självsäker och jordnära. 20 år, bor i Göteborg. Styrketränar 4 pass i veckan
   (favorit: benpass och höftlyft) och springer längs älven och i Slottsskogen. Gillar fika i Haga,
   höstpromenader och mysiga kvällar. Delar ärligt om både bra och tunga pass. Träning ska vara kul.
 
