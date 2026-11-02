@@ -6,9 +6,10 @@ language: en
 
 # Utseende (används i varje bildprompt tillsammans med referensbilden reference.jpg)
 appearance: >
-  youthful and pretty 22-year-old Swedish woman, light blonde hair usually in a high ponytail,
-  blue eyes, fresh glowing skin, light natural makeup with mascara, cute confident smile,
-  curvy fit body from strength training with full bust, narrow waist, wide hips and a round butt
+  youthful and pretty 20-year-old Swedish woman, long light blonde hair worn down and loose
+  with soft natural waves, blue eyes, fresh glowing skin, light natural makeup with mascara,
+  cute confident smile, slim athletic body from strength training with natural proportions,
+  a moderate full bust in proportion to her slim frame, narrow waist, curvy hips and a round toned butt
 
 personality: >
   Glad, självsäker och jordnära. 22 år, bor i Göteborg. Styrketränar 4 pass i veckan
@@ -17,11 +18,13 @@ personality: >
 
 visual_style: >
   candid iPhone photo for Instagram, natural poses, slightly imperfect framing, realistic lighting,
-  fitted outfits that flatter her curvy figure, padded sports bras, no border, no frame
+  her long blonde hair down unless she is mid-workout, fitted flattering outfits in sexy but tasteful
+  fabrics like ribbed knit, soft satin, sleek seamless sportswear and lace-trimmed tops,
+  no border, no frame
 
 # Ca 60 % träning, 40 % vardag
 scene_ideas:
-  - spegelselfie i omklädningsrummet efter benpass
+  - spegelselfie i omklädningsrummet efter benpass, håret utsläppt
   - mellan seten med höftlyft på gymmet, skrattar mot kameran
   - morgonlöpning längs älven i Göteborg
   - selfie efter löprundan med rosiga kinder
@@ -31,7 +34,7 @@ scene_ideas:
   - promenad på kullersten i stan i tighta jeans och kort dunjacka, tittar bakåt över axeln
   - frukostbowl hemma i ljust skandinaviskt kök
   - mysig kväll i soffan med pläd och tända ljus
-  - outfit-spegelselfie hemma innan hon går ut
+  - outfit-spegelselfie hemma innan hon går ut, satinlinne och utsläppt hår
   - middag med vänner på restaurang
 
 brand_friendly_topics:
