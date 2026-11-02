@@ -5,7 +5,7 @@ import time
 
 import requests
 
-HOST = "https://graph.instagram.com"
+HOST = "https://graph.facebook.com"
 
 
 class InstagramError(RuntimeError):
