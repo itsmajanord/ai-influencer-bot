@@ -21,7 +21,14 @@ def _run_model(model: str, inputs: dict, timeout_s: int = 300) -> str:
         "Content-Type": "application/json",
         "Prefer": "wait=60",
     }
-    resp = requests.post(f"{API}/models/{model}/predictions", headers=headers, json={"input": inputs}, timeout=90)
+    # Replicate begränsar antal anrop (särskilt på nya konton) – vänta och försök igen vid 429.
+    for attempt in range(8):
+        resp = requests.post(f"{API}/models/{model}/predictions", headers=headers, json={"input": inputs}, timeout=90)
+        if resp.status_code != 429:
+            break
+        wait = float(resp.headers.get("Retry-After") or 0) or 12 * (attempt + 1)
+        print(f"Replicate: för många anrop, väntar {wait:.0f} s ...")
+        time.sleep(min(wait, 60))
     resp.raise_for_status()
     pred = resp.json()
     deadline = time.time() + timeout_s
