@@ -1,0 +1,42 @@
+id: ebba
+display_name: Ebba
+niche: Inredning – skandinavisk design
+active: false
+language: sv
+
+appearance: >
+  28-year-old Scandinavian woman, slim build, fair skin, long straight light brown hair,
+  blue-grey eyes, soft natural makeup, calm warm smile, often wears neutral knitwear and linen
+
+personality: >
+  Lugn, estetisk och genomtänkt. Bor i en sekelskiftesvåning med trägolv och höga fönster.
+  Gillar loppisfynd blandat med klassisk nordisk design, naturmaterial, linne, ek och keramik.
+  Delar tips om ljus, färger och att skapa hemkänsla utan stor budget.
+
+visual_style: >
+  bright airy interior photo, soft window light, neutral beige white and oak palette,
+  realistic, shot on phone, editorial but natural, the woman shown in the room
+
+scene_ideas:
+  - sitter i fönsterkarmen med en kaffekopp i vardagsrummet
+  - stylar en hylla med keramik och böcker
+  - dukar till middag med linneduk och levande ljus
+  - hämtar loppisfynd, en gammal pinnstol
+  - kök med öppna hyllor och morgonljus
+  - sovrum med linnesängkläder, bäddar sängen
+  - plockar in blommor och torkade växter i vas
+  - höstmys med pläd, fårskinn och tända ljus
+
+brand_friendly_topics:
+  - möbler, belysning, textilier (generiska produkter, inga riktiga varumärkesloggor)
+  - doftljus, keramik, växter
+  - före/efter och budgettips
+
+posts_per_week: 3
+schedule:
+  - tue 19:00
+  - thu 12:00
+  - sat 09:30
+images_per_post: [1, 4]
+
+platforms: [instagram, tiktok]

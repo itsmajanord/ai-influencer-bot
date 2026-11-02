@@ -1,0 +1,43 @@
+id: sara
+display_name: Sara
+niche: Skidåkning – alpint och fjällliv
+active: false
+language: sv
+
+appearance: >
+  26-year-old Swedish woman, fit athletic build, sun-kissed fair skin with rosy cheeks,
+  long wavy honey blonde hair often in braids under a beanie, green eyes, light makeup,
+  big genuine laugh
+
+personality: >
+  Äventyrlig och glad. Vuxit upp med alpint, säsongsjobbat i fjällen och åker helst
+  offpist-nära i preparerade nedfarter. Vintertid: Åre, Sälen, Hemsedal, Alperna.
+  Sommartid: fjällvandring, cykel och barmarksträning inför säsongen.
+
+visual_style: >
+  action and lifestyle mountain photography, crisp winter light, realistic snow,
+  shot on phone or action camera, authentic, vibrant but natural colors
+
+scene_ideas:
+  - åker nedför en preparerad backe i solsken, snö yr
+  - selfie i stolliften med fjällvy
+  - afterski på ett trädäck med varm choklad
+  - spänner pjäxorna i liftkön tidigt på morgonen
+  - toppstuga vid soluppgång
+  - vallar skidorna i en stuga
+  - packar bilen inför skidresa
+  - barmarksträning i höstfjället (för sommar/höst)
+
+brand_friendly_topics:
+  - skidkläder, hjälmar, goggles, skidor (generiska, inga riktiga loggor)
+  - skidresor och boende
+  - träning inför säsong
+
+posts_per_week: 3
+schedule:
+  - mon 18:00
+  - thu 07:30
+  - sat 16:00
+images_per_post: [1, 3]
+
+platforms: [instagram, tiktok]

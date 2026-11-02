@@ -1,0 +1,39 @@
+# Global inställning för boten. Ändra värdena märkta ÄNDRA innan första körningen.
+
+timezone: Europe/Stockholm
+
+# Publik adress där bilderna hostas (GitHub Pages för det här repot).
+# ÄNDRA: https://<ditt-github-namn>.github.io/<repo-namn>
+public_base_url: https://itsmajanord.github.io/ai-influencer-bot
+
+# Hur många dagar i förväg veckans inlägg genereras (genereringen körs torsdagar,
+# inläggen gäller veckan som börjar närmaste måndag).
+week_starts_on: monday
+
+ai_text:
+  provider: anthropic
+  model: claude-haiku-5-5      # billig och snabb, räcker gott för captions
+
+images:
+  provider: replicate
+  # Modell som tar ett referensansikte och placerar samma person i nya miljöer.
+  model: black-forest-labs/flux-kontext-pro
+  # Modell för att skapa ansiktskandidater första gången (ingen referens behövs).
+  reference_model: black-forest-labs/flux-1.1-pro-ultra
+  aspect_ratio: "4:5"          # porträttformat, funkar för både Instagram-flödet och TikTok-foto
+  output_format: jpg
+  safety_tolerance: 2          # 2 = strikt/SFW (max när referensbild används)
+
+# Obligatorisk AI-märkning (EU AI Act art. 50 + plattformsregler). Läggs automatiskt på varje inlägg.
+disclosure:
+  caption_line: "🤖 AI-generated character and image."
+  hashtags: ["#AI", "#AIgenerated", "#virtualinfluencer"]
+
+tiktok:
+  # inbox  = inlägget hamnar i TikTok-appens inkorg, du trycker "Publicera" (fungerar utan granskning)
+  # direct = publiceras direkt (kräver att din TikTok-app har gått igenom TikToks audit)
+  mode: inbox
+  auto_add_music: true
+
+instagram:
+  api_version: v26.0

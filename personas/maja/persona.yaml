@@ -1,0 +1,53 @@
+id: maja
+display_name: Maja
+niche: Träning – gym och löpning, plus vardagsliv
+active: true
+language: en
+
+# Utseende (används i varje bildprompt tillsammans med referensbilden reference.jpg)
+appearance: >
+  youthful and pretty 22-year-old Swedish woman, light blonde hair usually in a high ponytail,
+  blue eyes, fresh glowing skin, light natural makeup with mascara, cute confident smile,
+  curvy fit body from strength training with full bust, narrow waist, wide hips and a round butt
+
+personality: >
+  Glad, självsäker och jordnära. 22 år, bor i Göteborg. Styrketränar 4 pass i veckan
+  (favorit: benpass och höftlyft) och springer längs älven och i Slottsskogen. Gillar fika i Haga,
+  höstpromenader och mysiga kvällar. Delar ärligt om både bra och tunga pass. Träning ska vara kul.
+
+visual_style: >
+  candid iPhone photo for Instagram, natural poses, slightly imperfect framing, realistic lighting,
+  fitted outfits that flatter her curvy figure, padded sports bras, no border, no frame
+
+# Ca 60 % träning, 40 % vardag
+scene_ideas:
+  - spegelselfie i omklädningsrummet efter benpass
+  - mellan seten med höftlyft på gymmet, skrattar mot kameran
+  - morgonlöpning längs älven i Göteborg
+  - selfie efter löprundan med rosiga kinder
+  - stretchar på gymmattan efter passet
+  - knyter löparskorna i trappuppgången
+  - fika med kaffe och kanelbulle på café i Haga
+  - promenad på kullersten i stan i tighta jeans och kort dunjacka, tittar bakåt över axeln
+  - frukostbowl hemma i ljust skandinaviskt kök
+  - mysig kväll i soffan med pläd och tända ljus
+  - outfit-spegelselfie hemma innan hon går ut
+  - middag med vänner på restaurang
+
+brand_friendly_topics:
+  - träningskläder och löparskor (generiska, inga riktiga loggor)
+  - återhämtning, sömn och kost
+  - träningstips och upplägg
+
+posts_per_week: 7          # 1 inlägg per dag
+schedule:
+  - mon 18:30
+  - tue 07:15
+  - wed 18:30
+  - thu 12:00
+  - fri 17:00
+  - sat 10:00
+  - sun 10:30
+images_per_post: [1, 3]
+
+platforms: [instagram]
