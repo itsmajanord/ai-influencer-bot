@@ -1,0 +1,54 @@
+name: Skapa ansikte
+
+on:
+  workflow_dispatch:
+    inputs:
+      persona:
+        description: "Vilken tjej?"
+        required: true
+        type: choice
+        options: [maja, ebba, sara]
+      action:
+        description: "create = skapa 6 förslag, pick = välj ett av förslagen"
+        required: true
+        type: choice
+        options: [create, pick]
+      number:
+        description: "Bara för pick: numret på bilden du valt (1–6)"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ALL_SECRETS: ${{ toJSON(secrets) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Kör
+        run: |
+          if [ "${{ inputs.action }}" = "create" ]; then
+            python -m bot.reference create ${{ inputs.persona }} --count 6
+          else
+            python -m bot.reference pick ${{ inputs.persona }} ${{ inputs.number }}
+          fi
+      - name: Spara
+        run: |
+          git config user.name "influencer-bot"
+          git config user.email "influencer-bot@users.noreply.github.com"
+          git add -A personas
+          git diff --cached --quiet || git commit -m "Ansikte (${{ inputs.action }}) för ${{ inputs.persona }}"
+          git push
+      - name: Länk
+        if: inputs.action == 'create'
+        run: |
+          echo "### Förslag för ${{ inputs.persona }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Titta på bilderna här: ${{ github.server_url }}/${{ github.repository }}/tree/main/personas/${{ inputs.persona }}/candidates" >> "$GITHUB_STEP_SUMMARY"
+          echo "Kör sedan arbetsflödet igen med action = pick och numret du gillar." >> "$GITHUB_STEP_SUMMARY"
