@@ -1,0 +1,70 @@
+name: Skapa veckans inlägg
+
+on:
+  schedule:
+    - cron: "17 7 * * 4"
+  workflow_dispatch:
+    inputs:
+      persona:
+        description: "Bara en persona (maja/ebba/sara) – lämna tomt för alla aktiva"
+        required: false
+      week_start:
+        description: "Veckans måndag YYYY-MM-DD – lämna tomt för nästa vecka"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: generate
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ALL_SECRETS: ${{ toJSON(secrets) }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Förnya Instagram-tokens
+        run: python -m bot.refresh_tokens || echo "::warning::Tokenförnyelse misslyckades för minst ett konto"
+
+      - name: Skapa gren
+        id: branch
+        run: |
+          BR="vecka-$(date +%Y-%m-%d-%H%M)"
+          git checkout -b "$BR"
+          echo "name=$BR" >> "$GITHUB_OUTPUT"
+
+      - name: Generera inlägg
+        env:
+          PREVIEW_BRANCH: ${{ steps.branch.outputs.name }}
+        run: |
+          ARGS=""
+          [ -n "${{ inputs.persona }}" ] && ARGS="$ARGS --persona ${{ inputs.persona }}"
+          [ -n "${{ inputs.week_start }}" ] && ARGS="$ARGS --week-start ${{ inputs.week_start }}"
+          python -m bot.generate_week $ARGS --pr-body /tmp/pr_body.md
+
+      - name: Öppna PR för godkännande
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "influencer-bot"
+          git config user.email "influencer-bot@users.noreply.github.com"
+          git add queue docs/media
+          if git diff --cached --quiet; then
+            echo "Inget nytt att godkänna."
+            exit 0
+          fi
+          git commit -m "Veckans inlägg att godkänna"
+          git push -u origin "${{ steps.branch.outputs.name }}"
+          gh pr create --title "Godkänn: inlägg $(date +%d/%m)" --body-file /tmp/pr_body.md --base main
