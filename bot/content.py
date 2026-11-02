@@ -83,23 +83,37 @@ def plan_week(persona: Persona, slots: list[datetime], recent_captions: list[str
         return _fake_ideas(persona, slots)
 
     prompt = _build_prompt(persona, slots, recent_captions)
-    resp = requests.post(
-        ANTHROPIC_URL,
-        headers={
-            "x-api-key": secret("ANTHROPIC_API_KEY"),
-            "anthropic-version": "2023-06-01",
-            "content-type": "application/json",
-        },
-        json={
-            "model": cfg["ai_text"]["model"],
-            "max_tokens": 4000,
-            "messages": [{"role": "user", "content": prompt}],
-        },
-        timeout=120,
-    )
-    resp.raise_for_status()
-    text = "".join(b.get("text", "") for b in resp.json()["content"])
-    ideas = _parse_json_list(text)
+    ideas, last_info = None, ""
+    for attempt in range(3):
+        resp = requests.post(
+            ANTHROPIC_URL,
+            headers={
+                "x-api-key": secret("ANTHROPIC_API_KEY"),
+                "anthropic-version": "2023-06-01",
+                "content-type": "application/json",
+            },
+            json={
+                # sista försöket med en större modell om den lilla inte svarar ordentligt
+                "model": cfg["ai_text"]["model"] if attempt < 2 else "claude-sonnet-5-5",
+                "max_tokens": 16000,
+                "system": "Du svarar alltid enbart med en giltig JSON-lista, utan någon annan text.",
+                "messages": [{"role": "user", "content": prompt}],
+            },
+            timeout=180,
+        )
+        if resp.status_code >= 400:
+            raise RuntimeError(f"Anthropic API-fel {resp.status_code}: {resp.text[:500]}")
+        data = resp.json()
+        text = "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text")
+        last_info = (f"stop_reason={data.get('stop_reason')}, "
+                     f"blocktyper={[b.get('type') for b in data.get('content', [])]}, text={text[:300]!r}")
+        try:
+            ideas = _parse_json_list(text)
+            break
+        except (ValueError, json.JSONDecodeError):
+            print(f"Försök {attempt + 1}: fick inget giltigt JSON-svar ({last_info})")
+    if ideas is None:
+        raise ValueError(f"Claude gav inget giltigt svar efter 3 försök: {last_info}")
     if len(ideas) < len(slots):
         raise ValueError(f"Fick {len(ideas)} idéer men behövde {len(slots)}")
 
